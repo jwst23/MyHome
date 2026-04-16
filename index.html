@@ -33,25 +33,20 @@
 
     <main>
         <!-- HOME Section -->
-        <section id="home" class="hero">
-            <div class="hero-content">
-                <div class="hero-tag reveal">HBM4 TECHNOLOGY INNOVATOR</div>
-                <h1 class="reveal delay-1">
+        <section id="home" class="hero" style="position: relative; padding-top: 100px;">
+            <div class="hero-content" style="position: relative; z-index: 2;">
+                <!-- 로고/글자 겹침 방지를 위해 단독 텍스트만 유지 -->
+                <div class="hero-tag reveal" style="background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); width: fit-content; padding: 5px 15px; border-radius: 20px;">HBM4 TECHNOLOGY INNOVATOR</div>
+                <h1 class="reveal delay-1" style="text-shadow: 0px 5px 25px rgba(0,0,0,1);">
                     PERFECTION IN <br>
-                    <span>AI MEMORY</span>
+                    <span style="text-shadow: 0px 5px 20px rgba(0,0,0,1);">AI MEMORY</span>
                 </h1>
                 <div class="reveal delay-2">
-                    <p id="hero-typewriter" style="font-size:1.25rem; color:var(--text-secondary); max-width:600px; margin-bottom:50px; font-weight:300; line-height:1.7; min-height:65px;"></p>
+                    <p id="hero-typewriter" style="font-size:1.25rem; color:#f8fafc; max-width:600px; margin-bottom:50px; font-weight:400; line-height:1.7; min-height:65px; text-shadow: 0px 2px 10px rgba(0,0,0,1); background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.05);"></p>
                 </div>
                 <div class="cta-buttons reveal delay-3">
-                    <a href="#innovation" class="btn primary">프로젝트 보기</a>
-                    <a href="#contact" class="btn secondary">연락하기</a>
-                </div>
-            </div>
-            <div class="hero-visual reveal delay-4">
-                <div class="visual-container">
-                    <img id="hero-img" src="hero_g1.png" alt="Unitree G1 Inspired Robot">
-                    <div class="glow-accent"></div>
+                    <a href="#innovation" class="btn primary" style="box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);">프로젝트 보기</a>
+                    <a href="#contact" class="btn secondary" style="background: rgba(0,0,0,0.5); backdrop-filter: blur(5px);">연락하기</a>
                 </div>
             </div>
         </section>
@@ -93,16 +88,21 @@
         </section>
 
         <!-- EXPERIENCE Section -->
-        <section id="experience" class="section">
-            <div class="container">
+        <section id="experience" class="section" style="position: relative; overflow: hidden;">
+            <!-- 히어로 섹션에서 옮겨온 전신 달리는 로봇 (프로젝트 섹션 배경 장식) -->
+            <div style="position: absolute; right: -5%; top: 5%; width: 50%; max-width: 600px; z-index: 0; opacity: 0.35; pointer-events: none;">
+                <img src="https://menlo.ai/_next/static/media/asimov-whole-body-2.77154af4.webp" alt="Running Humanoid Project Background" style="width: 100%; filter: url(#cut-white-bg) drop-shadow(-10px 20px 20px rgba(0,0,0,0.5)); transform: scaleX(-1);">
+            </div>
+            
+            <div class="container" style="position: relative; z-index: 2;">
                 <h2 class="section-title reveal">CORE EXPERIENCE</h2>
                 <div class="timeline reveal delay-1">
                     <div class="timeline-item">
                         <div class="timeline-date">현재 진행 중</div>
                         <div class="timeline-content">
                             <h3>전공동아리 휴머노이드 팀 프로젝트</h3>
-                            <h4>기구 설계 및 시스템 구조 분석 전담</h4>
-                            <p>로봇소프트웨어과 전공동아리에서 다축 휴머노이드 로봇의 기구 구조와 시스템을 메인으로 분석하고 설계하고 있습니다. 로봇이 움직일 때 발생하는 하중과 구조적 결함을 시뮬레이션으로 예측하고, 메커니즘을 3D로 구현합니다. 복잡한 시스템의 뼈대를 직접 분석하고 조립하는 이 경험은, 수백 개의 부품이 맞물려 돌아가는 반도체 설비 시스템을 직관적으로 이해하고 고장을 진단하는 밑거름이 됩니다.</p>
+                            <h4>하체(Legs) 메커니즘 설계 및 감속기 역학 분석 전담</h4>
+                            <p>로봇소프트웨어과 전공동아리에서 다축 휴머노이드 로봇의 하체 기구 구조를 메인으로 설계하고 있습니다. 모터의 요구 토크에 맞춘 감속기 기어비를 산출하고, 로봇이 보행할 때 발생하는 동적 하중(Load Path)과 구조적 결함을 시뮬레이션으로 예측해 RSU 발목 등 고정밀 메커니즘을 구현합니다. 복잡한 하드웨어의 뼈대를 직접 설계하는 이 경험은 반도체 설비 시스템의 구동부를 직관적으로 이해하고 고장을 진단하는 핵심 역량이 됩니다.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
@@ -121,21 +121,36 @@
         <section id="humanoid" class="section dark">
             <div class="container humanoid-layout">
                 <div class="humanoid-content reveal">
-                    <span class="badge">Major Team Project</span>
-                    <h2>HUMANOID <br>MECHANISM DESIGN</h2>
-                    <p>현재 팀 프로젝트의 핵심인 <b>휴머노이드 기구 설계 및 시스템 구조 해석</b>을 총괄하고 있습니다.<br><br>단순 조립을 넘어, 로봇의 구조적 안정성을 도면화하고 시스템 전체의 유기적 통신 트리를 분석합니다. 이처럼 정밀 기구와 제어 소프트웨어가 가장 복잡하게 융합된 휴머노이드 개발 경험을 통해, 반도체 분야 하이엔드 장비의 메커니즘을 그 누구보다 빠르고 정확하게 분석할 준비를 마쳤습니다.</p>
-                    <div class="tech-tags">
-                        <span>#전공동아리</span>
-                        <span>#기구_시스템분석</span>
-                        <span>#역기구학_구조이해</span>
-                        <span>#메커니즘_부품설계</span>
+                    <span class="badge" style="margin-bottom: 15px; border: 1px solid rgba(255,255,255,0.2);">Major Team Project</span>
+                    <h2 style="font-size: 3rem; margin-bottom: 20px; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">HUMANOID <br>LOWER-BODY DESIGN</h2>
+                    <p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.8;">
+                        전공동아리 프로젝트의 핵심인 <b>휴머노이드 하체(Legs) 기구 설계 및 메커니즘 역학 해석</b>을 책임지고 있습니다. 기존의 단순 조립을 넘어, 생체역학 데이터에 기반한 고정밀 기구를 직접 설계하며 반도체 설비 유지보수에 직결되는 압도적인 공학적 문제해결 능력을 증명합니다.
+                    </p>
+                    
+                    <ul class="card-list" style="margin-top: 2rem; margin-bottom: 2rem;">
+                        <li><b>최적 감속기 기어비 도출:</b> 각 관절이 지탱하는 하중(Load Path)과 요구 토크를 계산하여, 모터 동력을 고정밀·고효율로 전달하는 최상의 감속기 기어비를 산출하고 하드웨어를 구성합니다.</li>
+                        <li><b>RSU 발목 & 지면 순응 메커니즘:</b> 듀얼 모터로 Roll/Pitch를 제어하는 병렬형 RSU(Revolute-Spherical-Universal) 관절 아키텍처와 Toe-Rocker 구조를 적용하여 보행 안정성과 접지력을 극대화했습니다.</li>
+                        <li><b>메인터넌스 친화적 모듈화(Serviceability):</b> 정밀 하드웨어 모듈화 설계 방식을 도입하여, 복잡한 특수 공구 없이도 액추에이터와 내부 파츠를 즉각 교체할 수 있는 뛰어난 유지보수 효율성을 확보했습니다.</li>
+                    </ul>
+                    
+                    <div class="tech-tags" style="margin-top: 1.5rem;">
+                        <span style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">#하체설계(Legs)</span>
+                        <span style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">#감속기_기어비역학</span>
+                        <span style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">#RSU_아키텍처</span>
+                        <span style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);">#모듈화기구설계</span>
                     </div>
                 </div>
+
+                <!-- 하얀 배경 제거(누끼)를 위한 SVG 크로마키 필터 정의 -->
+                <svg width="0" height="0" style="position: absolute;">
+                    <filter id="cut-white-bg" color-interpolation-filters="sRGB">
+                        <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -1.5 -1.5 -1.5 1 3.5" />
+                    </filter>
+                </svg>
+
                 <div class="humanoid-visual reveal delay-2">
-                    <div class="robot-frame">
-                        <img src="humanoid_g1.png" alt="Futuristic Humanoid Unitree G1 Base">
-                        <div class="hud-overlay"></div>
-                        <div class="scanline"></div>
+                    <div class="robot-frame" style="background: transparent; border: none; box-shadow: none;">
+                        <img src="https://menlo.ai/_next/static/media/asimov-knee-3.f2e30e7c.webp" alt="Asimov Humanoid Knee Mechanism" style="width: 100%; border-radius: 20px; filter: url(#cut-white-bg) contrast(130%) brightness(105%) drop-shadow(0 0 20px rgba(255, 50, 50, 0.4)); transform: scale(1.1); display: block; mix-blend-mode: normal;">
                     </div>
                 </div>
             </div>
