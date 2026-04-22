@@ -465,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Language Toggle Logic
-    const langToggleBtn = document.getElementById('lang-toggle-btn');
+    const langToggleBtn = document.getElementById('langToggleBtn');
     if (langToggleBtn) {
         langToggleBtn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -474,11 +474,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isEn) {
                 document.body.classList.remove('en-mode');
                 localStorage.setItem('lang', 'ko');
-                langToggleBtn.innerHTML = 'KO | <span style="opacity:0.5; font-size:0.8rem">EN</span>';
+                document.getElementById('langKo').className = 'active';
+                document.getElementById('langEn').className = '';
             } else {
                 document.body.classList.add('en-mode');
                 localStorage.setItem('lang', 'en');
-                langToggleBtn.innerHTML = '<span style="opacity:0.5; font-size:0.8rem">KO</span> | EN';
+                document.getElementById('langKo').className = '';
+                document.getElementById('langEn').className = 'active';
             }
 
             // Update placeholders
@@ -497,7 +499,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initial check
         if (localStorage.getItem('lang') === 'en') {
             document.body.classList.add('en-mode');
-            langToggleBtn.innerHTML = '<span style="opacity:0.5; font-size:0.8rem">KO</span> | EN';
+            document.getElementById('langKo').className = '';
+            document.getElementById('langEn').className = 'active';
             
             document.querySelectorAll('input[data-en-placeholder], textarea[data-en-placeholder]').forEach(el => {
                 el.placeholder = el.getAttribute('data-en-placeholder');

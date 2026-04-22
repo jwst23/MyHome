@@ -28,6 +28,10 @@
     -webkit-font-smoothing: antialiased;
 }
 
+html {
+    font-size: 18px; /* Scales all rem-based font sizes up globally */
+}
+
 body {
     background-color: var(--bg-main);
     background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
@@ -145,8 +149,13 @@ ul { list-style: none; }
 
 .nav-links {
     display: flex;
-    gap: 32px;
+    align-items: center;
+    gap: 24px;
     flex-shrink: 1;
+}
+
+.en-mode .nav-links {
+    gap: 12px;
 }
 
 .nav-links a {
@@ -155,6 +164,12 @@ ul { list-style: none; }
     color: var(--text-secondary);
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.en-mode .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0;
 }
 
 .nav-links a:hover {
@@ -875,8 +890,13 @@ body.en-mode span[data-lang="en"], body.en-mode a[data-lang="en"], body.en-mode 
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
-.lang-toggle span { opacity: 0.5; transition: opacity 0.3s; }
-.lang-toggle span.active { opacity: 1; color: var(--brand-orange); }
+.lang-toggle span { opacity: 0.5; transition: all 0.3s; }
+.lang-toggle span.active { 
+    opacity: 1; 
+    color: var(--brand-orange); 
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(255, 80, 0, 0.6);
+}
 
 /* ================== RESPONSIVE ================== */
 @media (max-width: 1024px) {
@@ -885,6 +905,11 @@ body.en-mode span[data-lang="en"], body.en-mode a[data-lang="en"], body.en-mode 
     .tech-tags { justify-content: center; }
 }
 
+@keyframes floatImage {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
 @media (max-width: 768px) {
     .nav-links { display: none; }
     .hero { flex-direction: column; text-align: center; padding-top: 150px; }
