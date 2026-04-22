@@ -463,6 +463,9 @@ ul { list-style: none; }
     border-radius: 16px;
     padding: 30px;
     margin-bottom: 24px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
 }
 
 .skill-header {
@@ -489,6 +492,7 @@ ul { list-style: none; }
 }
 
 .bar-bg {
+    display: none;
     width: 100%;
     height: 6px;
     background: rgba(255,255,255,0.05);
