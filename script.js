@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnToggleWrite && formWrapper) {
         btnToggleWrite.addEventListener('click', () => {
             currentEditId = null;
-            if(formTitle) formTitle.innerText = document.body.classList.contains('en-mode') ? 'Register Inquiry & Request' : '문의 및 요청사항 등록';
+            if(formTitle) formTitle.innerHTML = '<span data-lang="ko">문의 및 요청사항 등록</span><span data-lang="en">Register Inquiry & Request</span>';
             if(boardForm) boardForm.reset();
             formWrapper.classList.add('active');
             btnToggleWrite.style.display = 'none';
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
         boardContainer.innerHTML = '';
         
         if (items.length === 0) {
-            boardContainer.innerHTML = '<p class="board-empty">등록된 게시물이 없습니다.</p>';
+            boardContainer.innerHTML = '<p class="board-empty"><span data-lang="ko">등록된 게시물이 없습니다.</span><span data-lang="en">There are no posts registered.</span></p>';
             return;
         }
 
@@ -160,8 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 ${repliesHtml}
                 <div class="board-card-actions">
                     <div class="reply-input-group" style="display:none;">
-                        <input type="text" class="reply-input" placeholder="답변을 입력하세요...">
-                        <button type="button" class="btn btn-small primary btn-reply-submit" data-id="${item.id}">등록</button>
+                        <input type="text" class="reply-input" data-ko-placeholder="답변을 입력하세요..." data-en-placeholder="Enter your reply..." placeholder="${document.body.classList.contains('en-mode') ? 'Enter your reply...' : '답변을 입력하세요...'}">
+                        <button type="button" class="btn btn-small primary btn-reply-submit" data-id="${item.id}"><span data-lang="ko">등록</span><span data-lang="en">Submit</span></button>
                     </div>
                     <button type="button" class="btn btn-small secondary btn-reply-toggle"><span data-lang="ko">답변 달기</span><span data-lang="en">Reply</span></button>
                     ${editBtnHtml}
@@ -221,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     document.getElementById('b-content').value = item.content;
                     if(document.getElementById('b-pwd')) document.getElementById('b-pwd').value = item.password || ''; 
                     
-                    if(formTitle) formTitle.innerText = document.body.classList.contains('en-mode') ? 'Edit Post' : '게시물 수정';
+                    if(formTitle) formTitle.innerHTML = '<span data-lang="ko">게시물 수정</span><span data-lang="en">Edit Post</span>';
                     formWrapper.classList.add('active');
                     if(btnToggleWrite) btnToggleWrite.style.display = 'none';
                     formWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
