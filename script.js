@@ -545,4 +545,40 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+    // 9. Lightbox for Images
+    const lightbox = document.createElement('div');
+    lightbox.className = 'lightbox';
+    const lightboxImg = document.createElement('img');
+    lightbox.appendChild(lightboxImg);
+    document.body.appendChild(lightbox);
+
+    document.querySelectorAll('.project-gallery img, .humanoid-visual img, .case-study img').forEach(img => {
+        img.addEventListener('click', (e) => {
+            lightboxImg.src = e.target.src;
+            lightbox.classList.add('active');
+        });
+    });
+
+    lightbox.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
+
+    // 10. Scroll to Top Button
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    if (scrollTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
 });

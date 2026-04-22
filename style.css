@@ -686,7 +686,7 @@ ul { list-style: none; }
     gap: 12px;
 }
 
-.tech-tags span {
+.tech-tags > span {
     font-size: 0.8rem;
     padding: 8px 16px;
     border: 1px solid var(--border-light);
@@ -898,10 +898,105 @@ body.en-mode span[data-lang="en"], body.en-mode a[data-lang="en"], body.en-mode 
     text-shadow: 0 0 10px rgba(255, 80, 0, 0.6);
 }
 
+/* ================== LIGHTBOX ================== */
+.lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(5px);
+    cursor: zoom-out;
+}
+
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox img {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    transform: scale(0.8);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox.active img {
+    transform: scale(1);
+}
+
+/* Make images look clickable */
+.project-gallery img, .humanoid-visual img, .case-study img {
+    cursor: zoom-in;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-gallery img:hover, .humanoid-visual img:hover, .case-study img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 210, 255, 0.3);
+}
+
+/* ================== SCROLL TOP BUTTON ================== */
+.scroll-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--brand-red);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(225, 0, 0, 0.4);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.scroll-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-top-btn:hover {
+    background: #ff1a1a;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(225, 0, 0, 0.6);
+}
+
+@media (max-width: 768px) {
+    .scroll-top-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+}
+
 /* ================== RESPONSIVE ================== */
 @media (max-width: 1024px) {
     .case-body { grid-template-columns: 1fr; gap: 30px; }
-    .humanoid-layout { flex-direction: column; text-align: center; }
+    .humanoid-layout { flex-direction: column !important; text-align: center; }
     .tech-tags { justify-content: center; }
 }
 
@@ -910,12 +1005,45 @@ body.en-mode span[data-lang="en"], body.en-mode a[data-lang="en"], body.en-mode 
     50% { transform: translateY(-15px); }
     100% { transform: translateY(0px); }
 }
+
 @media (max-width: 768px) {
     .nav-links { display: none; }
-    .hero { flex-direction: column; text-align: center; padding-top: 150px; }
+    .nav-container { padding: 0 20px; }
+    
+    .hero { flex-direction: column; text-align: center; padding-top: 120px; }
     .hero-content { padding-right: 0; margin-bottom: 50px; }
     .hero-visual { width: 100%; justify-content: center; }
+    .hero h1 { font-size: 2.5rem !important; word-break: keep-all; }
+    .hero p { font-size: 1rem !important; }
+    
+    .section { padding: 80px 0; }
+    .section-title { font-size: 2rem !important; margin-bottom: 40px; word-break: keep-all; }
+    
+    /* Override inline font sizes for mobile */
+    h2[style*="font-size: 3rem"] { font-size: 1.8rem !important; word-break: keep-all; }
+    
+    .philosophy-grid { grid-template-columns: 1fr; gap: 20px; }
+    
+    /* Fix project gallery from getting cut off horizontally */
+    .project-gallery { flex-direction: column !important; }
+    .project-gallery img { 
+        width: 100% !important; 
+        height: auto !important; 
+        max-height: 250px; 
+        margin-bottom: 10px; 
+    }
+    
+    /* Stack humanoid layout vertical photos */
+    .humanoid-visual .robot-frame > div {
+        flex-direction: column !important;
+    }
+    .humanoid-visual img {
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+    }
+
     .board-container { flex-direction: column; }
-    .board-list { padding-right: 0; }
+    .board-list { padding-right: 0; margin-top: 30px; }
     .contact-info { flex-direction: column; gap: 10px; }
 }
