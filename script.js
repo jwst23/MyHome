@@ -148,6 +148,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const editBtnHtml = `<button type="button" class="btn btn-small secondary btn-edit" data-id="${item.id}"><span data-lang="ko">수정</span><span data-lang="en">Edit</span></button>`;
             const deleteBtnHtml = `<button type="button" class="btn btn-small danger btn-delete" data-id="${item.id}"><span data-lang="ko">삭제</span><span data-lang="en">Delete</span></button>`;
+            
+            const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+            const isLiked = likedPosts.includes(item.id);
+            const likeCount = item.likes || 0;
+            const thumbIcon = isLiked ? 'fa-solid fa-thumbs-up' : 'fa-regular fa-thumbs-up';
+            const likeBtnStyle = isLiked 
+                ? 'margin-right: auto; background: var(--brand-red); color: #fff; border: 1px solid var(--brand-red);' 
+                : 'margin-right: auto; background: rgba(255,255,255,0.05); color: var(--text-secondary); border: 1px solid var(--border-light);';
+
+            const likeBtnHtml = `<button type="button" class="btn btn-small btn-like ${isLiked ? 'liked' : ''}" data-id="${item.id}" style="${likeBtnStyle}"><i class="${thumbIcon}"></i> <span data-lang="ko">${isLiked ? '추천 취소' : '추천'}</span><span data-lang="en">${isLiked ? 'Unlike' : 'Like'}</span> <strong>${likeCount}</strong></button>`;
 
             el.innerHTML = `
                 <div class="board-card-header">
@@ -159,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
                 ${repliesHtml}
                 <div class="board-card-actions">
+                    ${likeBtnHtml}
                     <div class="reply-input-group" style="display:none;">
                         <input type="text" class="reply-input" data-ko-placeholder="답변을 입력하세요..." data-en-placeholder="Enter your reply..." placeholder="${document.body.classList.contains('en-mode') ? 'Enter your reply...' : '답변을 입력하세요...'}">
                         <button type="button" class="btn btn-small primary btn-reply-submit" data-id="${item.id}"><span data-lang="ko">등록</span><span data-lang="en">Submit</span></button>
@@ -272,6 +283,48 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
         
+        // Like Handlers
+        document.querySelectorAll('.btn-like').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                const button = e.currentTarget;
+                const id = button.dataset.id;
+                const item = allBoardItems.find(i => i.id === id);
+                if (!item) return;
+                
+                let likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+                const isLiked = likedPosts.includes(id);
+                
+                let newLikes = item.likes || 0;
+                
+                if (isLiked) {
+                    newLikes = Math.max(0, newLikes - 1);
+                    likedPosts = likedPosts.filter(postId => postId !== id);
+                } else {
+                    newLikes += 1;
+                    likedPosts.push(id);
+                }
+                
+                localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+                
+                try {
+                    await boardCollection.doc(id).update({
+                        likes: newLikes
+                    });
+                } catch (error) {
+                    console.error("Error updating likes: ", error);
+                    // Rollback local state on error
+                    if (isLiked) {
+                        likedPosts.push(id);
+                    } else {
+                        likedPosts = likedPosts.filter(postId => postId !== id);
+                    }
+                    localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+                    const isEn = document.body.classList.contains('en-mode');
+                    alert(isEn ? "Failed to process request." : "처리에 실패했습니다.");
+                }
+            });
+        });
+
         document.querySelectorAll('.reply-input').forEach(input => {
             input.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
@@ -314,6 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         password,
                         date: dateString,
                         replies: [],
+                        likes: 0,
                         createdAt: Date.now()
                     });
                     const isEn = document.body.classList.contains('en-mode');

@@ -1027,7 +1027,8 @@ body.en-mode span[data-lang="en"], body.en-mode a[data-lang="en"], body.en-mode 
     h2[style*="font-size: 3rem"] { font-size: 1.8rem !important; word-break: keep-all; }
     
     .philosophy-grid { grid-template-columns: 1fr; gap: 20px; }
-    
+    .stack-grid { grid-template-columns: 1fr; gap: 30px; }
+    .stack-category h3 { font-size: 1.3rem; word-break: keep-all; overflow-wrap: break-word; }    
     /* Fix project gallery from getting cut off horizontally */
     .project-gallery { flex-direction: column !important; }
     .project-gallery img { 
